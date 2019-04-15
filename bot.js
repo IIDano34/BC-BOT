@@ -219,5 +219,204 @@ var prefix = "!"
   
   });
 
+  client.on('message',async message => {
+    if(message.content.startsWith(prefix + "ocount")) {
+    if(!message.guild.member(message.author).hasPermissions('MANAGE_CHANNELS')) return message.reply('❌ **ليس لديك الصلاحيات الكافية**');
+    if(!message.guild.member(client.user).hasPermissions(['MANAGE_CHANNELS','MANAGE_ROLES_OR_PERMISSIONS'])) return message.reply('❌ **ليس معي الصلاحيات الكافية**');
+    message.channel.send('✅| **تم عمل الروم بنجاح**');
+    message.guild.createChannel(`👥Members Count : [ ${message.guild.members.size} ]` , 'voice').then(c => {
+      console.log(`Count Members channel setup for guild: \n ${message.guild.name}`);
+      c.overwritePermissions(message.guild.id, {
+        CONNECT: false,
+        SPEAK: false
+      });
+      setInterval(function() {
+        c.setName(`👥 Members: ${message.guild.members.size} `)
+      },1000);
+    });
+    }
+  })
+
+const HeRo = new Discord.Client();
+client.on('message', message => {
+var prefix = "!";
+
+    if (message.content === prefix + "date") {
+        if (!message.channel.guild) return message.reply('** This command only for servers **');  
+        var currentTime = new Date(),
+            Year = currentTime.getFullYear(),
+            Month = currentTime.getMonth() + 1,
+            Day = currentTime.getDate();
+
+            var Date15= new Discord.RichEmbed()
+            .setTitle("**![ التاريخ ]! **")
+            .setColor('RANDOM')
+            .setTimestamp()
+            .setDescription( ""+ Day + "-" + Month + "-" + Year + "")
+             message.channel.sendEmbed(Date15);
+    }
+});
+
+client.on ("guildMemberAdd", member => {
+  
+   var role = member.guild.roles.find ("name", "Member");
+   member.addRole (role);
+  
+})
+
+client.on ("guildMemberRemove", MEMBER => {
+   
+})
+
+client.on('message', message => {
+  if (message.author.x5bz) return;
+  if (!message.content.startsWith(prefix)) return;
+
+  let command = message.content.split(" ")[0];
+  command = command.slice(prefix.length);
+
+  let args = message.content.split(" ").slice(1);
+
+  if (command == "kick") {
+               if(!message.channel.guild) return message.reply('** This command only for servers**');
+         
+  if(!message.guild.member(message.author).hasPermission("KICK_MEMBERS")) return message.reply("❌ ``No Permissions``");
+  if(!message.guild.member(client.user).hasPermission("KICK_MEMBERS")) return message.reply("**I Don't Have ` KICK_MEMBERS ` Permission**");
+  let user = message.mentions.users.first();
+  let reason = message.content.split(" ").slice(2).join(" ");
+  if (message.mentions.users.size < 1) return message.reply("**https://prnt.sc/ls9xfd**");
+  if(!reason) return message.reply ("**https://prnt.sc/ls9yzf**");
+  if (!message.guild.member(user)
+  .kickable) return message.reply("**هدا المستخدم عنده رتبه قويه**");
+
+  message.guild.member(user).kick();
+
+  const kickembed = new Discord.RichEmbed()
+  .setAuthor(`KICKED!`, user.displayAvatarURL)
+  .setColor("RANDOM")
+  .setTimestamp()
+  .addField("**User:**",  '**[ ' + `${user.tag}` + ' ]**')
+  .addField("**Kicked By:**", '**[ ' + `${message.author.tag}` + ' ]**')
+  .addField("**Reason:**", '**[ ' + `${reason}` + ' ]**')
+  message.channel.send({
+    embed : kickembed
+  })
+}
+});
+
+client.on('message', message => {
+if (message.content.startsWith('!invites')) {
+let oi = message.mentions.users.first() ? message.mentions.users.first().id : message.author.id ; 
+  let img = message.mentions.users.first() ? message.mentions.users.first().username : message.author.username;
+  let imagemm = message.mentions.users.first() ? message.mentions.users.first().avatarURL : message.author.avatarURL
+  message.guild.fetchInvites().then(invs => {
+    let member = client.guilds.get(message.guild.id).members.get(oi);
+    let personalInvites = invs.filter(i => i.inviter.id === oi);
+    let urll = invs.filter(i => i.inviter.id === oi);
+    let link = urll.reduce((p , v) => v.url +` , Total de membros recrutados no convite: ${v.uses}.\n`+ p, `\nServidor: ${message.guild.name} \n `);
+    let inviteCount = personalInvites.reduce((p, v) => v.uses + p, 0);
+   let exec = personalInvites.reduce((p, v) => v.inviter);
+ let possibleInvites = [['Total de membros recrutados:']];
+possibleInvites.push([inviteCount, exec]);
+        let user = message.mentions.users.first() || message.author;
+        let mem = message.guild.member(user);
+        let millisJoined = new Date().getTime() - mem.joinedAt.getTime();
+        let daysJoined = millisJoined / 1000 / 60 / 60 / 24;
+const alpha = new Discord.RichEmbed()
+.setAuthor(img)
+.addField('🏆 Invites Info',  `\n\n► You Have invited  \`\`${Number(inviteCount)}\`\` Member.\n\n► You Have joined this server since\`${daysJoined.toFixed(0)} Days\`.\n\n► You Joined with invite \`${exec}\``,true)
+.setThumbnail(imagemm)
+.setColor(0x4959e9);
+message.channel.send(alpha);
+
+});
+
+};
+});
+
+client.on('message', message => {
+    if(message.content.includes('discord.gg')){
+                                            if(!message.channel.guild) return message.reply('** advertising me on DM ? 🤔   **');
+        if (!message.member.hasPermissions(['ADMINISTRATOR'])){
+        message.delete()
+    return message.reply(`**ممنوع نشر الروابط :angry: !**`)
+    }
+}
+});
+
+});
+
+client.on('message', msg => {
+  if (msg.content === 'رابط') {
+    msg.reply('https://discord.gg/fV58cu');
+  }
+});
+
+﻿var Enmap = require('enmap');
+client.antibots = new Enmap({name: "antibot"});
+var antibots = client.antibots;
+var julian = client;
+julian.on("message", codes => {
+var prefix = "!";
+if(codes.content.startsWith(prefix + "antibots on")){
+if(codes.author.bot || !codes.channel.guild || codes.author.id != codes.guild.ownerID) return;
+antibots.set(`${codes.guild.id}`, {
+onoff: 'On'
+});
+ 
+ 
+codes.channel.send("AntiBots Join Is On");
+}
+if(codes.content.startsWith(prefix + "antibots off")){
+if(codes.author.bot || !codes.channel.guild || codes.author.id != codes.guild.ownerID) return;
+antibots.set(`${codes.guild.id}`, {
+onoff: "Off"
+});
+codes.channel.send("AntiBots Join Is Off");
+}
+});
+ 
+julian.on("guildMemberAdd", member => {
+if(!antibots.get(`${member.guild.id}`)) { antibots.set(`${member.guild.id}`, {
+onoff: "Off"
+});
+}
+if(antibots.get(`${member.guild.id}`).onoff == "Off") return;
+if(member.user.bot) return member.kick()
+});
+
+ client.on("message", msg => {
+           var prefix = "!";
+		if (msg.content === '!id') {
+    if(!msg.channel.guild) return msg.reply('**:x: اسف لكن هذا الامر للسيرفرات فقط **');
+      const embed = new Discord.RichEmbed();
+  embed.addField(":cloud_tornado:  الاسم", `**[ ${msg.author.username}#${msg.author.discriminator} ]**`, true)
+          .addField(":id:  الايدي", `**[ ${msg.author.id} ]**`, true)
+          .setColor("RANDOM")
+          .setFooter(msg.author.username , msg.author.avatarURL)
+          .setThumbnail(`${msg.author.avatarURL}`)
+          .setTimestamp()
+          .setURL(`${msg.author.avatarURL}`)
+          .addField(':spy:  الحالة', `**[ ${msg.author.presence.status.toUpperCase()} ]**`, true)
+          .addField(':satellite_orbital:   يلعب', `**[ ${msg.author.presence.game === null ? "No Game" : msg.author.presence.game.name} ]**`, true)
+          .addField(':robot:  هل هو بوت', `**[ ${msg.author.bot.toString().toUpperCase()} ]**`, true);
+      msg.channel.send({embed: embed})
+	    }
+});
+
+  client.on('message', message => {
+    if(message.content == '!members') {
+    const embed = new Discord.RichEmbed()
+    .setDescription(`**Members info🔋
+:green_heart: Online:   ${message.guild.members.filter(m=>m.presence.status == 'online').size}
+:heart: Dnd:       ${message.guild.members.filter(m=>m.presence.status == 'dnd').size}
+:yellow_heart: Idle:      ${message.guild.members.filter(m=>m.presence.status == 'idle').size}
+:black_heart: Offline:   ${message.guild.members.filter(m=>m.presence.status == 'offline').size}
+:blue_heart:   All:  ${message.guild.memberCount}**`)
+         message.channel.send({embed});
+
+    }
+  });
+
 
  

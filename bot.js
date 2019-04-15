@@ -363,8 +363,7 @@ if(codes.author.bot || !codes.channel.guild || codes.author.id != codes.guild.ow
 antibots.set(`${codes.guild.id}`, {
 onoff: 'On'
 });
- 
- 
+  
 codes.channel.send("AntiBots Join Is On");
 }
 if(codes.content.startsWith(prefix + "antibots off")){

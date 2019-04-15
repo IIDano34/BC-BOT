@@ -168,7 +168,8 @@ var prefix = "!"
   })
 }
 })
- 
+});
+
  if (!message.content.startsWith(prefix)) return;
 	let command = message.content.split(" ")[0];
 	 command = command.slice(prefix.length);

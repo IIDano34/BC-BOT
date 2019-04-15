@@ -93,7 +93,7 @@ client.on('message',async message => {
        
 });
 
-client.on('message', message => {
+client.on('message',async message => {
 var prefix = "!";
        if(message.content === prefix + "mc") {
                            if(!message.channel.guild) return message.reply('** This command only for servers**');
@@ -133,7 +133,7 @@ var prefix = "!"
   
   });
 
- client.on('message', message => {
+ client.on('message', async message => {
   if (message.author.x5bz) return;
   if (!message.content.startsWith(prefix)) return;
 
@@ -169,7 +169,7 @@ var prefix = "!"
 }
 })
 
-client.on('message', message => {
+client.on('message',async message => {
     var prefix = "!"
   if (message.author.x5bz) return;
   if (!message.content.startsWith(prefix)) return;
@@ -206,7 +206,7 @@ client.on('message', message => {
 }
 });
 
-client.on('message' , message => {
+client.on('message' ,async message => {
     var prefix = "!";
     let user = message.mentions.users.first()|| client.users.get(message.content.split(' ')[1])
 		if (message.content === '.unban') {

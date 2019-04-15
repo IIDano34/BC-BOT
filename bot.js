@@ -369,7 +369,14 @@ client.on('message', msg => {
           .addField(':robot:  هل هو بوت', `**[ ${msg.author.bot.toString().toUpperCase()} ]**`, true);
       msg.channel.send({embed: embed})
 	    }
-})
+});
+
+
+
+client.login(process.env.BOT_TOKEN);
+
+
+
 
  
 

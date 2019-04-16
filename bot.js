@@ -31,7 +31,6 @@ client.user.setGame(`!help | !inv  `,"Watching")
 });
 
 
-
 client.login(process.env.BOT_TOKEN);
 
 

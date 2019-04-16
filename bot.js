@@ -314,8 +314,6 @@ client.on('message', message => {
 }
 });
 
-});
-
 client.on('message', msg => {
   if (msg.content === 'رابط') {
     msg.reply('https://discord.gg/fV58cu');

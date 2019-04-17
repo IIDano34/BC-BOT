@@ -258,7 +258,7 @@ var prefix = "!";
 
 client.on ("guildMemberAdd", member => {
   
-   var role = member.guild.roles.find ("name", "Member");
+   var role = member.guild.roles.find ("name", "MEMBER");
    member.addRole (role);
   
 })
@@ -427,6 +427,22 @@ client.on("message", (message) => {
     }
  
 });
+
+  client.on('message', message => {
+    if(message.content == '!members') {
+    const embed = new Discord.RichEmbed()
+    .setDescription(`**Members info🔋
+:green_heart: Online:   ${message.guild.members.filter(m=>m.presence.status == 'online').size}
+:heart: Dnd:       ${message.guild.members.filter(m=>m.presence.status == 'dnd').size}
+:yellow_heart: Idle:      ${message.guild.members.filter(m=>m.presence.status == 'idle').size}
+:black_heart: Offline:   ${message.guild.members.filter(m=>m.presence.status == 'offline').size}
+:blue_heart:   All:  ${message.guild.memberCount}**`)
+         message.channel.send({embed});
+
+    }
+  });
+
+
 
 
 

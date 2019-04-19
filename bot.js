@@ -442,6 +442,7 @@ client.on("message", (message) => {
     }
   });
 
+client.on('message',async message => {
 ﻿var Enmap = require('enmap');
 client.antibots = new Enmap({name: "antibot"});
 var antibots = client.antibots;
